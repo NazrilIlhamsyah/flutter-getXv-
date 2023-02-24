@@ -1,0 +1,28 @@
+name: flutter_get
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.17.6 <3.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.6
+  flutter:
+    sdk: flutter
+  get: ^4.6.0
+  get_storage: ^2.0.3
+  google_fonts: ^3.0.0
+  hexcolor: ^2.0.4
+  http: ^0.13.2
+  lottie: ^1.4.1
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  lints: 2.0.1
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
