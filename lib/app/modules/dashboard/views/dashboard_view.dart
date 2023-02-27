@@ -5,8 +5,10 @@ import 'package:flutter_get/app/data/sports_response.dart';
 import 'package:flutter_get/app/data/technology_response.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../home/views/home_view.dart';
 import '../controllers/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -14,6 +16,7 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     DashboardController controller = Get.put(DashboardController());
     final ScrollController scrollController = ScrollController();
+    final auth = GetStorage();
     // Mendefinisikan sebuah widget bernama build dengan tipe StatelessWidget yang memerlukan BuildContext.
     return SafeArea(
       // Widget SafeArea menempatkan semua konten widget ke dalam area yang aman (safe area) dari layar.
@@ -21,6 +24,14 @@ class DashboardView extends GetView<DashboardController> {
         length: 4,
         // Widget DefaultTabController digunakan untuk mengatur tab di aplikasi.
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+              await auth.erase();
+              Get.offAll(() => HomeView());
+            },
+            backgroundColor: Colors.redAccent,
+            child: const Icon(Icons.logout_rounded),
+          ),
           // Widget Scaffold digunakan sebagai struktur dasar aplikasi.
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(120.0),
@@ -35,10 +46,9 @@ class DashboardView extends GetView<DashboardController> {
                     textAlign: TextAlign.end,
                     // Properti textAlign digunakan untuk menentukan perataan teks.
                   ),
-                  subtitle: const Text(
-                    "Agung Wahyudi",
+                  subtitle: Text(
+                    auth.read('full_name').toString(),
                     textAlign: TextAlign.end,
-                    // Properti textAlign digunakan untuk menentukan perataan teks.
                   ),
                   trailing: Container(
                     // Widget Container digunakan untuk mengatur tampilan konten dalam kotak.
@@ -84,7 +94,7 @@ class DashboardView extends GetView<DashboardController> {
             // Widget TabBarView digunakan untuk menampilkan konten yang terkait dengan masing-masing tab.
             children: [
               // Properti children digunakan untuk menentukan konten yang akan ditampilkan pada masing-masing tab.
-              entertainment(controller,scrollController),
+              entertainment(controller, scrollController),
               headline(controller, scrollController),
               sports(controller, scrollController),
               technology(controller, scrollController),
@@ -184,7 +194,8 @@ class DashboardView extends GetView<DashboardController> {
       },
     );
   }
-   FutureBuilder<headline_response> headline(
+
+  FutureBuilder<headline_response> headline(
       DashboardController controller, ScrollController scrollController) {
     return FutureBuilder<headline_response>(
       // Mendapatkan future data headline dari controller
@@ -271,7 +282,8 @@ class DashboardView extends GetView<DashboardController> {
       },
     );
   }
-   FutureBuilder<sports_response> sports(
+
+  FutureBuilder<sports_response> sports(
       DashboardController controller, ScrollController scrollController) {
     return FutureBuilder<sports_response>(
       // Mendapatkan future data headline dari controller
@@ -358,7 +370,8 @@ class DashboardView extends GetView<DashboardController> {
       },
     );
   }
-   FutureBuilder<technology_response> technology(
+
+  FutureBuilder<technology_response> technology(
       DashboardController controller, ScrollController scrollController) {
     return FutureBuilder<technology_response>(
       // Mendapatkan future data headline dari controller
