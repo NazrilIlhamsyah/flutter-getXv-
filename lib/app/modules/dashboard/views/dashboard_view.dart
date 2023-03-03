@@ -21,7 +21,7 @@ class DashboardView extends GetView<DashboardController> {
     return SafeArea(
       // Widget SafeArea menempatkan semua konten widget ke dalam area yang aman (safe area) dari layar.
       child: DefaultTabController(
-        length: 4,
+        length: 5,
         // Widget DefaultTabController digunakan untuk mengatur tab di aplikasi.
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
@@ -84,6 +84,7 @@ class DashboardView extends GetView<DashboardController> {
                       Tab(text: "Teknologi"),
                       Tab(text: "Olahraga"),
                       Tab(text: "Hiburan"),
+                      Tab(text: "Profile"),
                     ],
                   ),
                 ),
@@ -98,6 +99,7 @@ class DashboardView extends GetView<DashboardController> {
               headline(controller, scrollController),
               sports(controller, scrollController),
               technology(controller, scrollController),
+              profile(controller, scrollController),
             ],
           ),
         ),
@@ -458,4 +460,90 @@ class DashboardView extends GetView<DashboardController> {
       },
     );
   }
+}
+
+SingleChildScrollView profile(
+    DashboardController controller, ScrollController scrollController) {
+  return SingleChildScrollView(
+    padding: const EdgeInsets.all(20),
+    child: Column(
+      children: [
+        Container(
+          height: 150,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 3,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ]),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Image.network(
+              'https://picsum.photos/100',
+              height: 150,
+              width: 150,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        const Text(
+          'Nazril ilhamsyah',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 5),
+        const Text(
+          '@nazrililham',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          ),
+        ),
+        const SizedBox(height: 25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.network(
+                'https://cdn-icons-png.flaticon.com/512/2111/2111425.png',
+                height: 35),
+            Image.network(
+                'https://cdn-icons-png.flaticon.com/512/3059/3059997.png',
+                height: 35),
+            Image.network(
+                'https://cdn-icons-png.flaticon.com/512/733/733579.png',
+                height: 35),
+          ],
+        ),
+        const SizedBox(height: 25),
+        const Text(
+          'About',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(15),
+          child: Text(
+            'Hello, introduce my name is Nazril Ilhamsyah. I am a student at SMK Assalaam Bandung who is currently learning web programming. For now I already have fundamental knowledge about several programming languages and several frameworks likes HTML,Laravel.',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ),
+        const SizedBox(height: 30),
+      ],
+    ),
+  );
 }
